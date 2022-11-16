@@ -13,7 +13,7 @@ GlfwAppWindow::~GlfwAppWindow() {
 void GlfwAppWindow::init(GLFWframebuffersizefun callback) {
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 	this->window = glfwCreateWindow(this->width, this->height, this->name.c_str(), nullptr, nullptr);
 	glfwSetWindowUserPointer(this->window, this);

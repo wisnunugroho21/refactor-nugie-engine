@@ -50,12 +50,6 @@ std::array<VkVertexInputAttributeDescription, 2> Vertex::getAttributeDescription
 	return attributeDescriptions;
 }
 
-const std::vector<Vertex> vertices = {
-	{{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
-	{{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
-	{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
-};
-
 VulkanRenderer::VulkanRenderer(GlfwAppWindow &window) {
 	this->initVulkan(window);
 }
@@ -88,15 +82,6 @@ void VulkanRenderer::initVulkan(GlfwAppWindow &window) {
 	this->createCommandBuffers();
 	this->createSyncObjects();
 }
-
-/* void VulkanRenderer::mainLoop() {
-	while (!glfwWindowShouldClose(this->window)) {
-		glfwPollEvents();
-		this->drawFrame();
-	}
-
-	vkDeviceWaitIdle(this->device);
-} */
 
 void VulkanRenderer::cleanupSwapChain() {
 	for (auto framebuffer : this->swapChainFramebuffers) {

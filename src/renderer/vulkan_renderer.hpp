@@ -69,11 +69,6 @@ const std::vector<Vertex> vertices = {
 
 class VulkanRenderer {
 public:
-	/* void run() {
-		initVulkan();
-		mainLoop();
-		cleanup();
-	} */
 	bool framebufferResized = false;
 
 	void draw(GlfwAppWindow &window);
@@ -83,6 +78,8 @@ public:
 	~VulkanRenderer();
 
 private:
+	uint32_t currentFrame = 0;
+
 	VkInstance instance;
 	VkDebugUtilsMessengerEXT debugMessenger;
 	VkSurfaceKHR surface;
@@ -114,7 +111,6 @@ private:
 	std::vector<VkSemaphore> imageAvailableSemaphores;
 	std::vector<VkSemaphore> renderFinishedSemaphores;
 	std::vector<VkFence> inFlightFences;
-	uint32_t currentFrame = 0;
 
 	void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 	void drawFrame(GlfwAppWindow &window);

@@ -10,6 +10,11 @@ App::App() {
 	this->render = new VulkanRenderer(*this->window);
 }
 
+App::~App() {
+	delete this->render;
+	delete this->window;
+}
+
 void App::run() {
 	while(!this->window->shouldClose()) {
 		this->window->pollEvents();
