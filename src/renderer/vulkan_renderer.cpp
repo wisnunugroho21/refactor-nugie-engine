@@ -388,8 +388,8 @@ void VulkanRenderer::createRenderPass() {
 }
 
 void VulkanRenderer::createGraphicsPipeline() {
-	auto vertShaderCode = VulkanRenderer::readFile("shaders/vert.spv");
-	auto fragShaderCode = VulkanRenderer::readFile("shaders/frag.spv");
+	auto vertShaderCode = VulkanRenderer::readFile("bin/shader/simple_shader.vert.spv");
+	auto fragShaderCode = VulkanRenderer::readFile("bin/shader/simple_shader.frag.spv");
 
 	VkShaderModule vertShaderModule = this->createShaderModule(vertShaderCode);
 	VkShaderModule fragShaderModule = this->createShaderModule(fragShaderCode);
