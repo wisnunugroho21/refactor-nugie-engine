@@ -33,10 +33,13 @@ void GlfwAppWindow::pollEvents() {
 	glfwPollEvents();
 }
 
-void GlfwAppWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface) {
-	if (glfwCreateWindowSurface(instance, this->window, nullptr, surface) != VK_SUCCESS) {
+VkSurfaceKHR GlfwAppWindow::createWindowSurface(VkInstance instance) {
+	VkSurfaceKHR surface;
+	if (glfwCreateWindowSurface(instance, this->window, nullptr, &surface) != VK_SUCCESS) {
 		throw std::runtime_error("failed to create window surface");
 	}
+
+	return surface;
 }
 
 VkExtent2D GlfwAppWindow::getExtent() {

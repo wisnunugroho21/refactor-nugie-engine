@@ -84,12 +84,15 @@ private:
 	VkDebugUtilsMessengerEXT debugMessenger;
 	VkSurfaceKHR surface;
 
+	// device
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	VkDevice device;
 
+	// Queue
 	VkQueue graphicsQueue;
 	VkQueue presentQueue;
 
+	// Swapchain
 	VkSwapchainKHR swapChain;
 	std::vector<VkImage> swapChainImages;
 	VkFormat swapChainImageFormat;
@@ -97,30 +100,29 @@ private:
 	std::vector<VkImageView> swapChainImageViews;
 	std::vector<VkFramebuffer> swapChainFramebuffers;
 
+	// pipeline
 	VkRenderPass renderPass;
 	VkPipelineLayout pipelineLayout;
 	VkPipeline graphicsPipeline;
 
+	// buffer
 	VkCommandPool commandPool;
-
 	VkBuffer vertexBuffer;
 	VkDeviceMemory vertexBufferMemory;
-
 	std::vector<VkCommandBuffer> commandBuffers;
 
+	// sync
 	std::vector<VkSemaphore> imageAvailableSemaphores;
 	std::vector<VkSemaphore> renderFinishedSemaphores;
 	std::vector<VkFence> inFlightFences;
 
+	// load model
+	void createVertexBuffer();
 	void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 	void drawFrame(GlfwAppWindow &window);
 
+	// init
 	void initVulkan(GlfwAppWindow &window);
-
-	void cleanupSwapChain();
-	void cleanup();
-
-	void recreateSwapChain(GlfwAppWindow &window);
 
 	void createInstance();
 	void setupDebugMessenger();
@@ -133,15 +135,23 @@ private:
 	void createGraphicsPipeline();
 	void createFramebuffers();
 	void createCommandPool();
-	void createVertexBuffer();
 	void createCommandBuffers();
 	void createSyncObjects();
 	
 	VkShaderModule createShaderModule(const std::vector<char>& code);
 
-	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+	// destroy
+	void cleanupSwapChain();
+	void cleanup();
+
+	// for every time window resizing
+	void recreateSwapChain(GlfwAppWindow &window);
+
+	// check memory before send buffer
 	uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
+	// check & setup vulkan
+	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, GlfwAppWindow &window);

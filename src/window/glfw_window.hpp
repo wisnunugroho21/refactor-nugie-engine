@@ -20,7 +20,7 @@ class GlfwAppWindow
         void waitEvents();
 
         const char** getRequiredInstanceExtensions(uint32_t *count);
-        void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
+        VkSurfaceKHR createWindowSurface(VkInstance instance);
         VkExtent2D getExtent();
         void getFramebufferSize(int* width, int* height);
 

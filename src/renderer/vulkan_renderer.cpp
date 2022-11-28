@@ -128,7 +128,7 @@ void VulkanRenderer::recreateSwapChain(GlfwAppWindow &window) {
 	window.getFramebufferSize(&width, &height);
 	while (width == 0 || height == 0) {
 		window.getFramebufferSize(&width, &height);
-			glfwWaitEvents();
+		glfwWaitEvents();
 	}
 
 	vkDeviceWaitIdle(device);
@@ -199,7 +199,7 @@ void VulkanRenderer::setupDebugMessenger() {
 }
 
 void VulkanRenderer::createSurface(GlfwAppWindow &window) {
-	window.createWindowSurface(this->instance, &this->surface);
+	this->surface = window.createWindowSurface(this->instance);
 }
 
 void VulkanRenderer::pickPhysicalDevice() {
@@ -720,10 +720,10 @@ void VulkanRenderer::drawFrame(GlfwAppWindow &window) {
 	result = vkQueuePresentKHR(this->presentQueue, &presentInfo);
 
 	if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || this->framebufferResized) {
-			this->framebufferResized = false;
-			this->recreateSwapChain(window);
+		this->framebufferResized = false;
+		this->recreateSwapChain(window);
 	} else if (result != VK_SUCCESS) {
-			throw std::runtime_error("failed to present swap chain image!");
+		throw std::runtime_error("failed to present swap chain image!");
 	}
 
 	this->currentFrame = (this->currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
